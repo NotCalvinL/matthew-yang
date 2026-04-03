@@ -4,184 +4,218 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Matthew Yang</title>
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;800;900&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --bg: #0a0a0f;
-      --card: #13131a;
-      --accent: #ff3cac;
-      --accent2: #7b2fff;
-      --text: #f0eeff;
-      --muted: #5a5a7a;
-      --glow: rgba(255, 60, 172, 0.35);
+      --bg1: #e8f4fd;
+      --bg2: #fde8f4;
+      --bg3: #f4fde8;
+      --card: #ffffff;
+      --blue: #2563eb;
+      --pink: #e8187c;
+      --green: #16a34a;
+      --text: #0f172a;
+      --muted: #94a3b8;
+      --border: #e2e8f0;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       min-height: 100vh;
-      background: var(--bg);
+      background: #f0f4ff;
+      background-image:
+        radial-gradient(ellipse 70% 50% at 10% 10%, #dbeafe 0%, transparent 55%),
+        radial-gradient(ellipse 60% 60% at 90% 90%, #fce7f3 0%, transparent 55%),
+        radial-gradient(ellipse 50% 40% at 50% 50%, #dcfce7 0%, transparent 60%);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: 'DM Sans', sans-serif;
-      overflow: hidden;
-      position: relative;
-    }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(ellipse 80% 60% at 20% 20%, rgba(123,47,255,0.18) 0%, transparent 60%),
-        radial-gradient(ellipse 60% 80% at 80% 80%, rgba(255,60,172,0.14) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 50% at 50% 50%, rgba(10,10,15,1) 0%, transparent 100%);
-      z-index: 0;
-    }
-
-    body::after {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-      background-size: 150px;
-      opacity: 0.4;
-      pointer-events: none;
-      z-index: 0;
+      font-family: 'Outfit', sans-serif;
+      padding: 24px;
     }
 
     .card {
-      position: relative;
-      z-index: 1;
       background: var(--card);
-      border: 1px solid rgba(255,60,172,0.15);
-      border-radius: 20px;
-      padding: 56px 64px;
+      border-radius: 28px;
+      padding: 52px 60px;
       text-align: center;
-      box-shadow: 0 0 60px rgba(123,47,255,0.12), 0 0 120px rgba(255,60,172,0.06);
-      animation: fadeUp 0.6s cubic-bezier(.16,1,.3,1) both;
-      min-width: 340px;
+      box-shadow:
+        0 1px 2px rgba(0,0,0,0.04),
+        0 8px 24px rgba(0,0,0,0.08),
+        0 32px 64px rgba(0,0,0,0.06);
+      min-width: 360px;
+      animation: pop 0.5s cubic-bezier(.34,1.56,.64,1) both;
+      border: 1.5px solid rgba(255,255,255,0.8);
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(28px); }
-      to   { opacity: 1; transform: translateY(0); }
+    @keyframes pop {
+      from { opacity: 0; transform: scale(0.88) translateY(16px); }
+      to   { opacity: 1; transform: scale(1) translateY(0); }
     }
 
-    .eyebrow {
-      font-family: 'Bebas Neue', sans-serif;
+    .tag {
+      display: inline-block;
+      background: #eff6ff;
+      color: var(--blue);
       font-size: 11px;
-      letter-spacing: 4px;
-      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 2px;
       text-transform: uppercase;
-      margin-bottom: 28px;
+      padding: 5px 14px;
+      border-radius: 100px;
+      border: 1px solid #bfdbfe;
+      margin-bottom: 32px;
     }
 
-    .checkbox-wrap {
-      display: inline-flex;
-      align-items: center;
-      gap: 18px;
+    .rows {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .row {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      background: #f8fafc;
+      border: 1.5px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 22px;
       cursor: pointer;
-      user-select: none;
+      transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+      text-align: left;
     }
 
-    .checkbox-wrap input[type="checkbox"] {
-      display: none;
+    .row:hover {
+      border-color: #93c5fd;
+      background: #f0f7ff;
+      box-shadow: 0 4px 16px rgba(37,99,235,0.08);
     }
 
-    .custom-box {
-      width: 28px;
-      height: 28px;
-      border: 2px solid var(--accent);
-      border-radius: 7px;
-      background: transparent;
-      position: relative;
+    .row.checked-matthew {
+      border-color: #fb7185;
+      background: #fff1f3;
+      box-shadow: 0 4px 20px rgba(232,24,124,0.1);
+    }
+
+    .row.checked-albert {
+      border-color: #86efac;
+      background: #f0fdf4;
+      box-shadow: 0 4px 20px rgba(22,163,74,0.1);
+    }
+
+    .row-top {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .row input[type="checkbox"] { display: none; }
+
+    .box {
+      width: 26px;
+      height: 26px;
+      border-radius: 8px;
+      border: 2px solid #cbd5e1;
+      background: #fff;
       flex-shrink: 0;
-      transition: background 0.25s, box-shadow 0.25s;
+      position: relative;
+      transition: all 0.2s cubic-bezier(.34,1.56,.64,1);
     }
 
-    .custom-box::after {
+    .box::after {
       content: '';
       position: absolute;
-      top: 4px; left: 8px;
+      top: 3px; left: 7px;
       width: 8px; height: 13px;
       border-right: 2.5px solid #fff;
       border-bottom: 2.5px solid #fff;
       transform: rotate(45deg) scale(0);
       transform-origin: bottom right;
-      transition: transform 0.2s cubic-bezier(.34,1.56,.64,1);
+      transition: transform 0.18s cubic-bezier(.34,1.56,.64,1);
     }
 
-    input:checked ~ .custom-box {
-      background: var(--accent);
-      box-shadow: 0 0 18px var(--glow);
+    .row.checked-matthew .box {
+      background: var(--pink);
+      border-color: var(--pink);
+      box-shadow: 0 0 0 4px rgba(232,24,124,0.15);
     }
 
-    input:checked ~ .custom-box::after {
+    .row.checked-albert .box {
+      background: var(--green);
+      border-color: var(--green);
+      box-shadow: 0 0 0 4px rgba(22,163,74,0.15);
+    }
+
+    .row.checked-matthew .box::after,
+    .row.checked-albert .box::after {
       transform: rotate(45deg) scale(1);
     }
 
-    .label-text {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 36px;
-      letter-spacing: 2px;
+    .name {
+      font-size: 28px;
+      font-weight: 800;
       color: var(--text);
-      transition: color 0.3s;
+      letter-spacing: -0.5px;
+      line-height: 1;
+      transition: color 0.2s;
     }
 
-    .checkbox-wrap:hover .label-text {
-      color: var(--accent);
-    }
+    .row.checked-matthew .name { color: var(--pink); }
+    .row.checked-albert .name  { color: var(--green); }
 
     .reveal {
-      margin-top: 36px;
       overflow: hidden;
       max-height: 0;
       opacity: 0;
-      transition: max-height 0.5s cubic-bezier(.16,1,.3,1), opacity 0.4s ease;
+      width: 100%;
+      transition: max-height 0.45s cubic-bezier(.16,1,.3,1), opacity 0.3s ease, margin-top 0.3s ease;
+      margin-top: 0;
     }
 
     .reveal.show {
-      max-height: 200px;
+      max-height: 80px;
       opacity: 1;
+      margin-top: 12px;
     }
 
-    .reveal-inner {
-      padding-top: 8px;
-      border-top: 1px solid rgba(255,60,172,0.2);
-    }
-
-    .reveal-text {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 52px;
-      letter-spacing: 3px;
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+    .reveal-pill {
+      display: inline-block;
+      font-size: 20px;
+      font-weight: 700;
+      padding: 8px 20px;
+      border-radius: 100px;
+      letter-spacing: 0.3px;
       animation: none;
     }
 
-    .reveal.show .reveal-text {
-      animation: pulse 1.6s ease-in-out infinite;
+    .row.checked-matthew .reveal-pill {
+      background: #fff1f3;
+      color: var(--pink);
+      border: 1.5px solid #fecdd3;
+      animation: bounce 0.5s cubic-bezier(.34,1.56,.64,1) both;
     }
 
-    @keyframes pulse {
-      0%, 100% { filter: brightness(1); }
-      50%       { filter: brightness(1.4) drop-shadow(0 0 12px var(--glow)); }
+    .row.checked-albert .reveal-pill {
+      background: #f0fdf4;
+      color: var(--green);
+      border: 1.5px solid #bbf7d0;
+      animation: bounce 0.5s cubic-bezier(.34,1.56,.64,1) both;
+    }
+
+    @keyframes bounce {
+      from { transform: scale(0.6); opacity: 0; }
+      to   { transform: scale(1);   opacity: 1; }
     }
 
     .confetti-container {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 10;
+      position: fixed; inset: 0;
+      pointer-events: none; z-index: 10;
     }
-
     .dot {
       position: absolute;
-      width: 8px; height: 8px;
       border-radius: 50%;
       opacity: 0;
     }
@@ -190,85 +224,89 @@
 <body>
 
 <div class="card">
-  <p class="eyebrow">Important Survey</p>
+  <div class="tag">Important Survey</div>
 
-  <label class="checkbox-wrap" for="theCheck">
-    <input type="checkbox" id="theCheck" />
-    <span class="custom-box"></span>
-    <span class="label-text">Matthew Yang</span>
-  </label>
+  <div class="rows">
 
-  <div class="reveal" id="reveal">
-    <div class="reveal-inner">
-      <div class="reveal-text">YOU'RE GAY</div>
-    </div>
-  </div>
+    <label class="row" id="rowMatthew" for="theCheck">
+      <div class="row-top">
+        <input type="checkbox" id="theCheck" />
+        <span class="box"></span>
+        <span class="name">Matthew Yang</span>
+      </div>
+      <div class="reveal" id="revealMatthew">
+        <span class="reveal-pill">you're gay 🏳️‍🌈</span>
+      </div>
+    </label>
 
-  <label class="checkbox-wrap" style="margin-top: 28px;" for="albertCheck">
-    <input type="checkbox" id="albertCheck" />
-    <span class="custom-box"></span>
-    <span class="label-text">Albert Cho</span>
-  </label>
+    <label class="row" id="rowAlbert" for="albertCheck">
+      <div class="row-top">
+        <input type="checkbox" id="albertCheck" />
+        <span class="box"></span>
+        <span class="name">Albert Cho</span>
+      </div>
+      <div class="reveal" id="revealAlbert">
+        <span class="reveal-pill">Oppa &#10084;&#65039;</span>
+      </div>
+    </label>
 
-  <div class="reveal" id="revealAlbert">
-    <div class="reveal-inner">
-      <div class="reveal-text">Oppa&lt;3</div>
-    </div>
   </div>
 </div>
 
 <div class="confetti-container" id="confetti"></div>
 
 <script>
-  const check = document.getElementById('theCheck');
-  const reveal = document.getElementById('reveal');
-  const confettiEl = document.getElementById('confetti');
+  const matthewColors = ['#e8187c','#fb7185','#f472b6','#fda4af','#fce7f3'];
+  const albertColors  = ['#16a34a','#4ade80','#86efac','#22c55e','#dcfce7'];
 
-  const colors = ['#ff3cac','#7b2fff','#ff6bde','#c45fff','#ff85e1','#f0eeff'];
-
-  function spawnConfetti() {
-    confettiEl.innerHTML = '';
-    for (let i = 0; i < 60; i++) {
+  function spawnConfetti(colors) {
+    const el = document.getElementById('confetti');
+    el.innerHTML = '';
+    for (let i = 0; i < 55; i++) {
       const dot = document.createElement('div');
       dot.className = 'dot';
       dot.style.left = Math.random() * 100 + 'vw';
-      dot.style.top = Math.random() * 40 + 30 + 'vh';
+      dot.style.top  = Math.random() * 50 + 25 + 'vh';
       dot.style.background = colors[Math.floor(Math.random() * colors.length)];
-      const size = 6 + Math.random() * 10;
-      dot.style.width = size + 'px';
-      dot.style.height = size + 'px';
-      const tx = (Math.random() - 0.5) * 300;
-      const ty = -(Math.random() * 400 + 100);
+      const s = 7 + Math.random() * 10;
+      dot.style.width  = s + 'px';
+      dot.style.height = s + 'px';
+      const tx  = (Math.random() - 0.5) * 340;
+      const ty  = -(Math.random() * 380 + 80);
       const rot = Math.random() * 720;
-      dot.style.animation = 'none';
       dot.style.opacity = '1';
-      dot.style.transition = `transform ${0.8 + Math.random() * 0.8}s cubic-bezier(.2,.8,.4,1), opacity ${0.4}s ease ${0.7 + Math.random() * 0.3}s`;
-      confettiEl.appendChild(dot);
+      dot.style.transition = `transform ${0.7 + Math.random() * 0.7}s cubic-bezier(.2,.8,.4,1), opacity 0.4s ease ${0.65 + Math.random() * 0.3}s`;
+      el.appendChild(dot);
       requestAnimationFrame(() => {
-        dot.style.transform = `translate(${tx}px, ${ty}px) rotate(${rot}deg)`;
+        dot.style.transform = `translate(${tx}px,${ty}px) rotate(${rot}deg)`;
         dot.style.opacity = '0';
       });
     }
   }
 
-  check.addEventListener('change', () => {
-    if (check.checked) {
-      reveal.classList.add('show');
-      spawnConfetti();
+  document.getElementById('theCheck').addEventListener('change', function() {
+    const row = document.getElementById('rowMatthew');
+    const rev = document.getElementById('revealMatthew');
+    if (this.checked) {
+      row.classList.add('checked-matthew');
+      rev.classList.add('show');
+      spawnConfetti(matthewColors);
     } else {
-      reveal.classList.remove('show');
+      row.classList.remove('checked-matthew');
+      rev.classList.remove('show');
     }
   });
 
-  const albertCheck = document.getElementById('albertCheck');
-  const revealAlbert = document.getElementById('revealAlbert');
-
-  albertCheck.addEventListener('change', () => {
-    if (albertCheck.checked) {
-      revealAlbert.classList.add('show');
-      spawnConfetti();
+  document.getElementById('albertCheck').addEventListener('change', function() {
+    const row = document.getElementById('rowAlbert');
+    const rev = document.getElementById('revealAlbert');
+    if (this.checked) {
+      row.classList.add('checked-albert');
+      rev.classList.add('show');
+      spawnConfetti(albertColors);
     } else {
-      revealAlbert.classList.remove('show');
+      row.classList.remove('checked-albert');
+      rev.classList.remove('show');
     }
   });
 </script>
