@@ -203,6 +203,20 @@
       <div class="reveal-text">YOU'RE GAY</div>
     </div>
   </div>
+
+  <div style="margin-top: 32px; border-top: 1px solid rgba(255,60,172,0.1); padding-top: 32px;">
+    <label class="checkbox-wrap" for="albertCheck">
+      <input type="checkbox" id="albertCheck" />
+      <span class="custom-box"></span>
+      <span class="label-text">Albert Cho</span>
+    </label>
+
+    <div class="reveal" id="revealAlbert">
+      <div class="reveal-inner">
+        <div class="reveal-text">Oppa&lt;3</div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <div class="confetti-container" id="confetti"></div>
@@ -245,6 +259,18 @@
       spawnConfetti();
     } else {
       reveal.classList.remove('show');
+    }
+  });
+
+  const albertCheck = document.getElementById('albertCheck');
+  const revealAlbert = document.getElementById('revealAlbert');
+
+  albertCheck.addEventListener('change', () => {
+    if (albertCheck.checked) {
+      revealAlbert.classList.add('show');
+      spawnConfetti();
+    } else {
+      revealAlbert.classList.remove('show');
     }
   });
 </script>
